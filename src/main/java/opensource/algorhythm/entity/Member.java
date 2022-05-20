@@ -3,6 +3,7 @@ package opensource.algorhythm.entity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import opensource.algorhythm.constant.Role;
 
 import javax.persistence.*;
 
@@ -24,5 +25,7 @@ public class Member {
 
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
 }
