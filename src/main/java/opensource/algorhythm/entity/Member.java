@@ -1,2 +1,4 @@
-package opensource.algorhythm.entity;public class Member {
+package opensource.algorhythm.entity;
+
+public class Member {
 }
