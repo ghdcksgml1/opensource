@@ -22,7 +22,7 @@ public class MemberController {
     @GetMapping(value = "/new")
     public String memberForm(Model model){
         model.addAttribute("memberFormDto", new MemberFormDto());
-        return "signup.html";
+        return "signup";
     }
 
     @PostMapping(value = "/new")
