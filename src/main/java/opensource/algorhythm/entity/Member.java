@@ -20,10 +20,12 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String name;
+    private String userName;
 
     @Column(unique = true)
     private String email;
+
+    private String baekjoonId;
 
     private String password;
 
@@ -32,8 +34,9 @@ public class Member {
 
     public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder){
         Member member = new Member();
-        member.setName(memberFormDto.getName());
-        member.setEmail(memberFormDto.getName());
+        member.setUserName(memberFormDto.getUserName());
+        member.setEmail(memberFormDto.getEmail());
+        member.setBaekjoonId(memberFormDto.getBaekjoonId());
         String password = passwordEncoder.encode(memberFormDto.getPassword());
         member.setPassword(password);
         member.setRole(Role.USER);
