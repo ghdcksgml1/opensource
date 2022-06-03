@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org/"/>
+<head>
+  <meta charset="UTF-8">
+  <div th:replace="/layout/header :: header"/>
+  <title> 사용자 프로필 </title>
+</head>
+
+<body style="background-color: #C5CAE9;">
+  <div style="position: fixed; width:100%; top:0px; left:0px; height:65px; background-color: #9499B7;">
+      <img src="./img/bg_logo.png" height="65px">
+  </div>
+
+  <div style="margin-top: 150px; width: 100%;">
+      <div class="row">
+          <div class="col-4">
+              <div style="margin:0 auto;text-align:center;height: 550px; width: 320px; background-color: white;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 10px;padding-top:50px;">
+                  <div style="margin:0 auto; width: 200px;height: 200px;background-color:#C4C4C4; border-radius: 100%;"></div>
+                  <div style="margin-top:30px; font-weight: bold; font-size:32px">ghdcks33</div>
+                  <div style="height: 30px"></div>
+                  <div style="font-weight: bold;font-size: 16px; color: #777777">내 프로필</div>
+                  <div style="height: 10px"></div>
+                  <div style="width:170px;height:24px;margin:0 auto;">
+                      <img src="/img/solvedac_logo.png" height="24px" style="margin-bottom: 5px;"/>&nbsp<label style="font-weight: bold; font-size: 16px; color: #777777">Solved.ac</label>
+                  </div>
+                  <div style="height: 10px"></div>
+                  <div>
+                      <i class="fa-brands fa-github"></i> <label style="font-weight: bold; font-size: 16px; color: #777777">&nbspGitHub</label>
+                  </div>
+              </div>
+          </div>
+          <div class="col-8" style="border-left: 1px solid white; text-align: center;">
+              <div id="nickname" class="row" style="margin:0 auto; width: 850px; height: 50px; background-color: white; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 10px; text-align: left; font-weight: bold; font-size: 16px; color: #3648A0">닉네임:</div>
+              <div id="id" class="row" style="margin:0 auto; width: 850px; height: 50px; background-color: white;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 10px; text-align: left;font-weight: bold;font-size: 16px; color: #3648A0">아이디:</div>
+              <div id="memo" class="row" style="margin:0 auto; width: 850px; height: 100px; background-color: white;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 10px; text-align: left;font-weight: bold;font-size: 16px; color: #3648A0">
+                <label for="memo">메모:</label>
+                <textarea id="memo" cols="110" rows="5"></textarea>
+              </div>
+              <div id="post_ad" class="row" style="margin:0 auto; width: 850px; height: 50px; background-color: white;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 10px; text-align: left;font-weight: bold;font-size: 16px; color: #3648A0">게시물관리:</div>
+              <div id="interesting" class="row" style="margin:0 auto; width: 850px; height: 50px; background-color: white;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 10px; text-align: left;font-weight: bold;font-size: 16px; color: #3648A0">
+                <label>관심있는 알고리즘: <i></i><input type="text" id=interesting style = "color:blue; font-weight: bold"></i></label>
+                <!--input class="btn btn-primary" type="button" value="수정하기"-->
+              </div>
+              <div id="update_btn" style="margin:0 auto; background-color: #377CF6 ; border-radius:5px; width:120px; height:35px; color:white; font-weight:bold; font-size:17px; line-height:35px">수정하기</div>
+              <div class="form-floating"  style="margin:0 auto; width: 850px; height: 50px; background-color: white;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 10px; text-align: left;font-weight: bold;font-size: 16px; color: #3648A0">
+                <label for="floatingPassword">비밀번호 변경:</label>
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+              </div>
+              <div class="form-floating"  style="margin:0 auto; width: 850px; height: 50px; background-color: white;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 10px; text-align: left;font-weight: bold;font-size: 16px; color: #3648A0">
+                <label for="floatingPassword">비밀번호 확인:</label>
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+              </div>
+              <div id="password_btn" style="margin:0 auto; background-color: #377CF6 ; border-radius:5px; width:120px; height:35px; color:white; font-weight:bold; font-size:17px; line-height:35px">변경하기</div>
+
+          </div>
+      </div>
+  </div>
+</body>
+</html>
