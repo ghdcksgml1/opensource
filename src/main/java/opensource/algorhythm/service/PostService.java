@@ -1,2 +1,49 @@
-package opensource.algorhythm.service;public class PostService {
+package opensource.algorhythm.service;
+
+import lombok.RequiredArgsConstructor;
+import opensource.algorhythm.dto.PostFormDto;
+import opensource.algorhythm.entity.Post;
+import opensource.algorhythm.repository.PostRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
+
+@Service
+@Transactional
+@RequiredArgsConstructor
+public class PostService {
+
+    private final PostRepository postRepository;
+
+    //post 생성
+    public Post createPost(Post post){
+
+        return postRepository.save(post);
+    }
+
+    //post 조회
+    public Optional<Post> seePost(Long id){
+        Optional<Post> post = postRepository.findById(id);
+        return post;
+    }
+
+    //post 수정
+    public String editPost(Long id, PostFormDto postFormDto){ //수정한 dto
+        Post post = postRepository.getById(id);
+        post.setTitle(postFormDto.getTitle());
+        post.setCode(postFormDto.getCode());
+        post.setProblemName(postFormDto.getProblemName());
+        post.setProblemNum(postFormDto.getProblemNum());
+
+        postRepository.save(post);
+
+        return "";
+    }
+
+    //post 삭제
+    public String deletePost(Long id){
+        postRepository.deleteById(id);
+        return "";
+    }
 }
