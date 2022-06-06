@@ -23,13 +23,21 @@ public class Post {
 
     private String title;
 
+    private String level;
+
     private int problemNum;
 
     private String problemName;
 
+    private String problemIdea;
+
+    private String timeComplexity;
+
     private String code;
 
     private Long memberId;
+
+    private String tags;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "comment_id")
@@ -40,8 +48,12 @@ public class Post {
         post.setTitle(postFormDto.getTitle());
         post.setProblemNum(postFormDto.getProblemNum());
         post.setProblemName(postFormDto.getProblemName());
-        post.setProblemName(postFormDto.getCode());
+        post.setCode(postFormDto.getCode());
         post.setMemberId(postFormDto.getMemberId());
+        post.setTags(postFormDto.getTags());
+        post.setLevel(postFormDto.getLevel());
+        post.setProblemIdea(postFormDto.getProblemIdea());
+        post.setTimeComplexity(postFormDto.getTimeComplexity());
         return post;
     }
 

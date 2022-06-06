@@ -20,29 +20,27 @@ border-radius: 10px;padding-top:50px;">
                     <div style="font-weight: bold;font-size: 16px; color: #777777">내 프로필</div>
                     <div style="height: 10px"></div>
                     <div style="width:170px;height:24px;margin:0 auto;">
-                        <img src="/img/solvedac_logo.png" height="24px" style="margin-bottom: 5px;"/>&nbsp<label style="font-weight: bold; font-size: 16px; color: #777777">Solved.ac</label>
+                        <img src="/img/solvedac_logo.png" height="24px" style="margin-bottom: 5px;"/>&nbsp;<a th:href="'https://solved.ac/profile/'+${boj_username}" style="font-weight: bold; font-size: 16px; color: #777777; text-underline: none;">Solved.ac</a>
                     </div>
                     <div style="height: 10px"></div>
                     <div>
-                        <i class="fa-brands fa-github"></i> <label style="font-weight: bold; font-size: 16px; color: #777777">&nbspGitHub</label>
+                        <i class="fa-brands fa-github"></i> <a th:href="'https://github.com/'+${github_username}" style="font-weight: bold; font-size: 16px; color: #777777">&nbsp;GitHub</a>
                     </div>
                 </div>
             </div>
+
+
             <!-- -->
             <div class="col-8" style="border-left: 1px solid white; text-align: center;">
+                <div style="text-align: end; margin-right: 80px;">
+                    <a class="btn btn-success" href="/posts/new">게시물 작성</a>
+                </div>
+                <div style="height:15px"></div>
                 <div id="search-bar" class="row" style="margin:0 auto;width: 800px;height: 65px; background-color: white;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 10px;">
                     <div class="row height d-flex justify-content-center align-items-center">
                         <div class="form">
                             <div class="row">
-                                <div class="col-3">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Open this select menu</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                                </div>
-                                <div class="col-3">
+                                <div class="col-6">
                                     <select class="form-select" aria-label="Default select example">
                                         <option selected>Open this select menu</option>
                                         <option value="1">One</option>
@@ -60,6 +58,7 @@ border-radius: 10px;padding-top:50px;">
                         </div>
                     </div>
                 </div>
+
 
                 <!-- DB 연동부분 -->
                 <div style="height: 30px;"></div>
@@ -80,57 +79,6 @@ border-radius: 10px;padding-top:50px;">
                     </div>
                 </div>
                 <!-- -->
-                <div style="height: 30px;"></div>
-                <div class="contests" style="margin:0 auto;width: 800px;height: 140px; background-color: white;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 10px;">
-                    <div style="height: 10px;"></div>
-                    <div class="row" style="text-align: start;">
-                        <div class="col-5"  style="text-align: start; font-size: 20px; padding-left: 30px;">
-                            <img src="https://d2gd6pc034wcta.cloudfront.net/tier/25.svg" height="20px">&nbsp
-                            <label style="font-weight: bold;">10167</label>&nbsp;&nbsp;
-                            <label style="font-weight: bold;">금광</label>
-                        </div>
-                        <div class="col-4" style="font-weight: bold;color: #1E88E5; font-size: 16px;">#세그먼트트리 #좌표압축</div>
-                        <div class="col-3" style="color: #555555; font-size: 16px;">2022-05-09 ghdcks33</div>
-                    </div>
-                    <div style="height: 10px;"></div>
-                    <div class="row" style="margin:0 auto;width: 770px;height: 70px; background-color: #EEEEEE; border-radius: 10px;">
-                        <label style="line-height: 70px; font-size: 16px; color: #49599A; font-weight: bold;">그 유명한 금광세그 문제입니다... 이게 정보올림피아드 중등부문제라니 말도안되는군요...</label>
-                    </div>
-                </div>
-                <div style="height: 30px;"></div>
-                <div class="contests" style="margin:0 auto;width: 800px;height: 140px; background-color: white;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 10px;">
-                    <div style="height: 10px;"></div>
-                    <div class="row" style="text-align: start;">
-                        <div class="col-5"  style="text-align: start; font-size: 20px; padding-left: 30px;">
-                            <img src="https://d2gd6pc034wcta.cloudfront.net/tier/25.svg" height="20px">&nbsp
-                            <label style="font-weight: bold;">10167</label>&nbsp;&nbsp;
-                            <label style="font-weight: bold;">금광</label>
-                        </div>
-                        <div class="col-4" style="font-weight: bold;color: #1E88E5; font-size: 16px;">#세그먼트트리 #좌표압축</div>
-                        <div class="col-3" style="color: #555555; font-size: 16px;">2022-05-09 ghdcks33</div>
-                    </div>
-                    <div style="height: 10px;"></div>
-                    <div class="row" style="margin:0 auto;width: 770px;height: 70px; background-color: #EEEEEE; border-radius: 10px;">
-                        <label style="line-height: 70px; font-size: 16px; color: #49599A; font-weight: bold;">그 유명한 금광세그 문제입니다... 이게 정보올림피아드 중등부문제라니 말도안되는군요...</label>
-                    </div>
-                </div>
-                <div style="height: 30px;"></div>
-                <div class="contests" style="margin:0 auto;width: 800px;height: 140px; background-color: white;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 10px;">
-                    <div style="height: 10px;"></div>
-                    <div class="row" style="text-align: start;">
-                        <div class="col-5"  style="text-align: start; font-size: 20px; padding-left: 30px;">
-                            <img src="https://d2gd6pc034wcta.cloudfront.net/tier/25.svg" height="20px">&nbsp
-                            <label style="font-weight: bold;">10167</label>&nbsp;&nbsp;
-                            <label style="font-weight: bold;">금광</label>
-                        </div>
-                        <div class="col-4" style="font-weight: bold;color: #1E88E5; font-size: 16px;">#세그먼트트리 #좌표압축</div>
-                        <div class="col-3" style="color: #555555; font-size: 16px;">2022-05-09 ghdcks33</div>
-                    </div>
-                    <div style="height: 10px;"></div>
-                    <div class="row" style="margin:0 auto;width: 770px;height: 70px; background-color: #EEEEEE; border-radius: 10px;">
-                        <label style="line-height: 70px; font-size: 16px; color: #49599A; font-weight: bold;">그 유명한 금광세그 문제입니다... 이게 정보올림피아드 중등부문제라니 말도안되는군요...</label>
-                    </div>
-                </div>
         </div>
     </div>
 </body>

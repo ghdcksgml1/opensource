@@ -35,6 +35,7 @@ public class PrincipalDetail implements UserDetails {
     public String getBojUsername() {
         return member.getBaekjoonId();
     }
+    public String getGithubUsername() { return member.getGithubId(); }
 
     @Override
     public boolean isAccountNonExpired() {

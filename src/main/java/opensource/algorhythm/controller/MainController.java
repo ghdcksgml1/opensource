@@ -14,6 +14,7 @@ public class MainController {
     public String main(Model model, @AuthenticationPrincipal PrincipalDetail principal){
         model.addAttribute("principal",principal);
         model.addAttribute("boj_username",principal.getBojUsername());
+        model.addAttribute("github_username",principal.getGithubUsername());
         return "index";
     }
 
