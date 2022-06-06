@@ -7,6 +7,7 @@ import opensource.algorhythm.repository.PostRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -45,5 +46,13 @@ public class PostService {
     public String deletePost(Long id){
         postRepository.deleteById(id);
         return "";
+    }
+
+    //post 검색
+    public String searchPost(String keyword){
+        List<Post> postListByProblemNum = postRepository.findByProblemNum(Integer.parseInt(keyword));
+        List<Post> postListByTag = postRepository.findByTagsContainingIgnoreCase(keyword);
+        List<Post> postListByProblemName= postRepository.findByProblemNameContaining(keyword);
+        return "ok";
     }
 }
