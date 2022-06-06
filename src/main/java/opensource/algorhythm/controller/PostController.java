@@ -1,7 +1,11 @@
 package opensource.algorhythm.controller;
 
 import lombok.RequiredArgsConstructor;
+<<<<<<< HEAD
 import opensource.algorhythm.config.auth.PrincipalDetail;
+=======
+import lombok.extern.slf4j.Slf4j;
+>>>>>>> afaa13a (refactor : ..)
 import opensource.algorhythm.dto.PostFormDto;
 import opensource.algorhythm.entity.Post;
 import opensource.algorhythm.repository.MemberRepository;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+@Slf4j
 @Controller
 @RequestMapping("/posts")
 @RequiredArgsConstructor
@@ -35,14 +40,18 @@ public class PostController {
     @PostMapping("/new")
     public String newPost(@RequestBody PostFormDto postFormDto, Model model,@AuthenticationPrincipal PrincipalDetail principal){
         try {
+
             Long member_id = memberRepository.findByUsername(principal.getUsername()).getId();
             postFormDto.setMemberId(member_id);
-            postService.createPost(postFormDto);
+
+            Post post = postService.createPost(postFormDto);
+            log.info("title={}, num={}, name={}, code={}", post.getTitle(), post.getProblemNum(), post.getProblemName(), post.getCode());
+
         }catch (IllegalStateException e){
             model.addAttribute("errorMessage", e.getMessage());
             return "signup";
         }
-        return "redirect:/";
+        return "ok";
     }
 
     //게시물 조회

@@ -23,8 +23,8 @@ public class PostService {
     }
 
     //post 조회
-    public Optional<Post> findPost(Long id){
-        Optional<Post> post = postRepository.findById(id);
+    public Post findPost(Long id){
+        Post post = postRepository.findById(id).get();
         return post;
     }
 

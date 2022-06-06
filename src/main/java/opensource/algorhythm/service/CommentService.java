@@ -9,6 +9,8 @@ import opensource.algorhythm.repository.PostRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -20,12 +22,10 @@ public class CommentService {
     public Comment createComment(CommentDto commentDto){
         Comment comment = Comment.createComment(commentDto);
 
-        Post post = postRepository.findByPostId(commentDto.getPostId());
+        Post post = postRepository.findById(commentDto.getPostId()).get();
         post.getCommentList().add(comment);
         postRepository.save(post);
 
         return commentRepository.save(comment);
     }
-
-
 }
