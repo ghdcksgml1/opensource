@@ -16,20 +16,22 @@ border-radius: 10px;">
                     <img src="/img/bg_logo.png" width="150px" style="margin-top: 80px;">
                     <div style="color: #777777; font-size:40px;">Welcome</div>
                     <div style="height: 50px;"></div>
+                    <form action="/loginProc" method="post">
                     <div class="form-floating" style="color: #777777;margin:0 auto;width: 320px; height:50px;">
-                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                        <label for="floatingInput">Username or Email address</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="name@example.com">
+                        <label for="username">Username or Email address</label>
                     </div>
-                    <div style="height: 30px;"></div>
-                    <div class="form-floating" style="color: #777777;margin:0 auto;width: 320px; height:50px;">
-                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                        <label for="floatingPassword">Password</label>
-                    </div>
-                    <div style="height: 60px;"></div>
-                    <div id="login-btn" style="margin:0 auto; background-color: #AF8EB5; border-radius:5px; width:320px; height:50px; color:white; font-weight:bold; font-size:24px; line-height:50px">Login</div>
-                    <div style="font-size: 15px; margin-top:20px">
-                        <span style="color: #777777;">Don't have an account?</span>&nbsp&nbsp&nbsp<a href="/members/new" style="color: #1E88E5; font-weight:bold; text-decoration-line: none;">Sign up</a>
-                    </div>
+                        <div style="height: 30px;"></div>
+                        <div class="form-floating" style="color: #777777;margin:0 auto;width: 320px; height:50px;">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                            <label for="password">Password</label>
+                        </div>
+                        <div style="height: 60px;"></div>
+                        <input id="login-btn" type="submit" style="margin:0 auto; background-color: #AF8EB5; border-radius:5px; width:320px; height:50px; color:white; font-weight:bold; font-size:24px; line-height:50px" value="Login"></input>
+                        <div style="font-size: 15px; margin-top:20px">
+                            <span style="color: #777777;">Don't have an account?</span>&nbsp&nbsp&nbsp<a href="/members/new" style="color: #1E88E5; font-weight:bold; text-decoration-line: none;">Sign up</a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

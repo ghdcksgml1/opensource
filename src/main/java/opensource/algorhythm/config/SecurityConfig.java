@@ -22,16 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
-        http.formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/")
-                .usernameParameter("email")
-                .failureUrl("/login/error")
-                .and()
-                .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/")
-                ;
+
 
         http
                 .csrf().disable()
@@ -47,6 +38,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**").permitAll()
                 .anyRequest().authenticated();
 
+        http.formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/loginProc")
+                .defaultSuccessUrl("/")
+                .failureUrl("/login/error")
+                .and()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/")
+        ;
     }
 
     @Bean

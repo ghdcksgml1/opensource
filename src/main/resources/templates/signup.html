@@ -71,8 +71,8 @@ border-radius: 10px;">
        const data = {
            username : signup_username,
            password : signup_password,
-           boj_username : signup_baekjoonId,
-           github_username : signup_githubId
+           baekjoonId : signup_baekjoonId,
+           githubId : signup_githubId
        }
        fetch("/members/new",{method:'POST'
            , headers:{'content-type':'application/json'}
