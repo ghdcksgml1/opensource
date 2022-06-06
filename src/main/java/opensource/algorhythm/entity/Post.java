@@ -7,6 +7,8 @@ import lombok.ToString;
 import opensource.algorhythm.dto.PostFormDto;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
@@ -15,7 +17,7 @@ import javax.persistence.*;
 @RequiredArgsConstructor
 public class Post {
     @Id
-    @Column
+    @Column(name = "post_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -28,6 +30,10 @@ public class Post {
     private String code;
 
     private Long memberId;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "comment_id")
+    private List<Comment> commentList = new ArrayList<>();
 
     public static Post createPost(PostFormDto postFormDto){
         Post post = new Post();

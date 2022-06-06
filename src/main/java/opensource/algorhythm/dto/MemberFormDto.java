@@ -1,9 +1,8 @@
 package opensource.algorhythm.dto;
 
 import lombok.Getter;
-import lombok.Setter;
 
-@Getter @Setter
+@Getter
 public class MemberFormDto {
 
     private String username;
