@@ -1,11 +1,8 @@
 package opensource.algorhythm.controller;
 
 import lombok.RequiredArgsConstructor;
-<<<<<<< HEAD
 import opensource.algorhythm.config.auth.PrincipalDetail;
-=======
 import lombok.extern.slf4j.Slf4j;
->>>>>>> afaa13a (refactor : ..)
 import opensource.algorhythm.dto.PostFormDto;
 import opensource.algorhythm.entity.Post;
 import opensource.algorhythm.repository.MemberRepository;
