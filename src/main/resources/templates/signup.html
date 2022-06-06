@@ -30,12 +30,12 @@ border-radius: 10px;">
                     </div>
                     <div style="height: 20px;"></div>
                     <div class="form-floating" style="color: #777777;margin:0 auto;width: 320px; height:50px;">
-                        <input type="password" class="form-control" name="signup_baekjoonId" id="signup_baekjoonId" placeholder="Baekjoon_ID">
+                        <input type="text" class="form-control" name="signup_baekjoonId" id="signup_baekjoonId" placeholder="Baekjoon_ID">
                         <label for="signup_baekjoonId">Baekjoon_ID</label>
                     </div>
                     <div style="height: 20px;"></div>
                     <div class="form-floating" style="color: #777777;margin:0 auto;width: 320px; height:50px;">
-                        <input type="password" class="form-control" name="signup_githubId" id="signup_githubId" placeholder="Github_ID">
+                        <input type="text" class="form-control" name="signup_githubId" id="signup_githubId" placeholder="Github_ID">
                         <label for="signup_githubId">Github_ID</label>
                     </div>
                     <div id="error-message"></div>
@@ -71,11 +71,13 @@ border-radius: 10px;">
        const data = {
            username : signup_username,
            password : signup_password,
-           boj_username : signup_baekjoonId
+           boj_username : signup_baekjoonId,
+           github_username : signup_githubId
        }
        fetch("/members/new",{method:'POST'
            , headers:{'content-type':'application/json'}
            ,body:JSON.stringify(data)})
+           .then(() => {window.location.href = "/login"})
         .catch(() => {
             const error = document.querySelector("#error-message");
             error.innerText = "잘못된 입력입니다.";

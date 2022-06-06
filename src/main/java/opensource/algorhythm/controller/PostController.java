@@ -21,7 +21,7 @@ public class PostController {
     @GetMapping(value = "/new")
     public String postForm(Model model){
         model.addAttribute("postFormDto", new PostFormDto());
-        return "";
+        return "contentForm";
     }
 
     //게시물 생성
