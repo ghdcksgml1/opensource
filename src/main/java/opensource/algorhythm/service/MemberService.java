@@ -20,34 +20,36 @@ public class MemberService implements UserDetailsService {
     private final MemberRepository memberRepository;
 
     private void validateDuplicateMember(Member member){
-        Member findMember = memberRepository.findByEmail(member.getEmail());
+        Member findMember = memberRepository.findByUserName(member.getUsername());
         if (findMember != null){
             throw  new IllegalStateException("이미 가입된 회원입니다");
         }
     }
 
+    //멤버 생성
     public Member saveMember(Member member){
         validateDuplicateMember(member);
         return memberRepository.save(member);
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Member member = memberRepository.findByEmail(email);
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        Member member = memberRepository.findByUserName(userName);
 
         if (member == null){
-            throw new UsernameNotFoundException(email);
+            throw new UsernameNotFoundException(userName);
         }
 
         return User.builder()
-                .username(member.getEmail())
+                .username(member.getUsername())
                 .password(member.getPassword())
                 .roles(member.getRole().toString())
                 .build();
     }
 
-    public Optional<Member> seeProfile(Long memberId){
-        Optional<Member> findMember = memberRepository.findById(memberId);
-        return findMember;
+    //멤버 조회
+    public Optional<Member> findMember(Long memberId){
+        Optional<Member> member = memberRepository.findById(memberId);
+        return member;
     }
 }

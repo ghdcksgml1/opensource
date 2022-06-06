@@ -12,4 +12,6 @@ public class PostFormDto {
     private String problemName;
 
     private String code;
+
+    private Long memberId;
 }

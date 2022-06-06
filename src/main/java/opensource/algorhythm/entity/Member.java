@@ -8,6 +8,8 @@ import opensource.algorhythm.dto.MemberFormDto;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
@@ -20,10 +22,10 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String userName;
-
     @Column(unique = true)
-    private String email;
+    private String username;
+
+    private String githubId;
 
     private String baekjoonId;
 
@@ -32,10 +34,13 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @OneToMany
+    private List<Post> post = new ArrayList<>();
+
     public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder){
         Member member = new Member();
-        member.setUserName(memberFormDto.getUserName());
-        member.setEmail(memberFormDto.getEmail());
+        member.setUsername(memberFormDto.getUsername());
+        member.setGithubId(memberFormDto.getGithubId());
         member.setBaekjoonId(memberFormDto.getBaekjoonId());
         String password = passwordEncoder.encode(memberFormDto.getPassword());
         member.setPassword(password);

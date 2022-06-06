@@ -17,13 +17,13 @@ public class PostService {
     private final PostRepository postRepository;
 
     //post 생성
-    public Post createPost(Post post){
-
+    public Post createPost(PostFormDto postFormDto){
+        Post post = Post.createPost(postFormDto);
         return postRepository.save(post);
     }
 
     //post 조회
-    public Optional<Post> seePost(Long id){
+    public Optional<Post> findPost(Long id){
         Optional<Post> post = postRepository.findById(id);
         return post;
     }

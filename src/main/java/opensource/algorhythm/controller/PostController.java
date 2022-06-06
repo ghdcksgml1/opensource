@@ -25,11 +25,11 @@ public class PostController {
     }
 
     //게시물 생성
-    @PostMapping(value = "/new")
-    public String newPost(@Valid PostFormDto postFormDto, Model model){
+    @ResponseBody
+    @PostMapping("/new")
+    public String newPost(@RequestBody PostFormDto postFormDto, Model model){
         try {
-            Post post = Post.createPost(postFormDto);
-            postService.createPost(post);
+            postService.createPost(postFormDto);
         }catch (IllegalStateException e){
             model.addAttribute("errorMessage", e.getMessage());
             return "signup";

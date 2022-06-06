@@ -6,11 +6,11 @@ import lombok.Setter;
 @Getter @Setter
 public class MemberFormDto {
 
-    private String userName;
-
-    private String email;
+    private String username;
 
     private String baekjoonId;
 
     private String password;
+
+    private String githubId;
 }

@@ -27,12 +27,15 @@ public class Post {
 
     private String code;
 
+    private Long memberId;
+
     public static Post createPost(PostFormDto postFormDto){
         Post post = new Post();
         post.setTitle(postFormDto.getTitle());
         post.setProblemNum(postFormDto.getProblemNum());
         post.setProblemName(postFormDto.getProblemName());
         post.setProblemName(postFormDto.getCode());
+        post.setMemberId(postFormDto.getMemberId());
         return post;
     }
 
