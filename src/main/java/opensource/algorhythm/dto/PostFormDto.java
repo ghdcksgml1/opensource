@@ -21,7 +21,7 @@ public class PostFormDto {
 
     private String code;
 
-    private Long memberId;
+    //private Long memberId;
 
     private String tags;
 
