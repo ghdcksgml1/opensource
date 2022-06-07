@@ -13,9 +13,9 @@ import java.util.List;
 @Entity
 @Table
 @Getter @Setter
-@ToString
 @RequiredArgsConstructor
 public class Post {
+
     @Id
     @Column(name = "post_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,25 +35,28 @@ public class Post {
 
     private String code;
 
-    private Long memberId;
+    //private Long memberId;
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     private String tags;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     @JoinColumn(name = "comment_id")
     private List<Comment> commentList = new ArrayList<>();
 
     public static Post createPost(PostFormDto postFormDto){
         Post post = new Post();
         post.setTitle(postFormDto.getTitle());
+        post.setLevel(postFormDto.getLevel());
         post.setProblemNum(postFormDto.getProblemNum());
         post.setProblemName(postFormDto.getProblemName());
-        post.setCode(postFormDto.getCode());
-        post.setMemberId(postFormDto.getMemberId());
-        post.setTags(postFormDto.getTags());
-        post.setLevel(postFormDto.getLevel());
         post.setProblemIdea(postFormDto.getProblemIdea());
         post.setTimeComplexity(postFormDto.getTimeComplexity());
+        post.setCode(postFormDto.getCode());
+        //post.setMemberId(postFormDto.getMemberId());
+        post.setTags(postFormDto.getTags());
         return post;
     }
 

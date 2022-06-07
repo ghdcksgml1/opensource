@@ -14,11 +14,10 @@ import java.util.List;
 @Entity
 @Table
 @Getter @Setter
-@ToString
 public class Member {
 
     @Id
-    @Column
+    @Column(name = "member_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -34,7 +33,7 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany
+    @OneToMany(mappedBy = "member")
     private List<Post> post = new ArrayList<>();
 
     public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder){
