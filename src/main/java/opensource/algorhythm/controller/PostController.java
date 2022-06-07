@@ -3,16 +3,21 @@ package opensource.algorhythm.controller;
 import lombok.RequiredArgsConstructor;
 import opensource.algorhythm.config.auth.PrincipalDetail;
 import lombok.extern.slf4j.Slf4j;
+import opensource.algorhythm.dto.PostEditDto;
 import opensource.algorhythm.dto.PostFormDto;
+import opensource.algorhythm.entity.Member;
 import opensource.algorhythm.entity.Post;
 import opensource.algorhythm.repository.MemberRepository;
+import opensource.algorhythm.repository.PostRepository;
 import opensource.algorhythm.service.PostService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -21,6 +26,7 @@ import javax.validation.Valid;
 public class PostController {
 
     private final PostService postService;
+    private final PostRepository postRepository;
     private final MemberRepository memberRepository;
 
     //게시물 폼 생성
@@ -38,11 +44,20 @@ public class PostController {
     public String newPost(@RequestBody PostFormDto postFormDto, Model model,@AuthenticationPrincipal PrincipalDetail principal){
         try {
 
-            Long member_id = memberRepository.findByUsername(principal.getUsername()).getId();
-            postFormDto.setMemberId(member_id);
+            //Long member_id = memberRepository.findByUsername(principal.getUsername()).getId();
+            //postFormDto.setMemberId(member_id);
 
+            Member member = memberRepository.findByUsername(principal.getUsername());
             Post post = postService.createPost(postFormDto);
-            log.info("title={}, num={}, name={}, code={}", post.getTitle(), post.getProblemNum(), post.getProblemName(), post.getCode());
+
+            post.setMember(member);
+            member.getPost().add(post);
+
+            postRepository.save(post);
+            memberRepository.save(member);
+
+            log.info("member={}, title={}, num={}, name={}, code={}", post.getMember(), post.getTitle(), post.getProblemNum(), post.getProblemName(), post.getCode());
+            log.info("postList={}", member.getPost());
 
         }catch (IllegalStateException e){
             model.addAttribute("errorMessage", e.getMessage());
@@ -51,29 +66,44 @@ public class PostController {
         return "ok";
     }
 
-    //게시물 조회
-    @GetMapping(value = "/{id}")
-    public String seePost(){
-        return "";
+    //특정 게시물 조회
+    @GetMapping(value = "/{postId}")
+    public String seePost(@PathVariable Long postId, Model model){
+        Post post = postRepository.findById(postId).get();
+        model.addAttribute("post", post);
+        return "contentView";
     }
 
-    //게시물 수정
-    @PostMapping(value = "/{id}/edit")
-    public String editPost(){
+    //게시물 수정 폼 get
+    @GetMapping(value = "/{postId}/edit")
+    public String editPostGet(@PathVariable Long postId, Model model){
+        Post post = postRepository.findById(postId).get();
+        model.addAttribute("post", post);
+        return "contentView";
+    }
+
+    //게시물 수정 post
+    @ResponseBody
+    @PostMapping(value = "/{postId}/edit")
+    public String editPost(@PathVariable Long postId, @RequestBody PostEditDto postEditDto){
+        Post post = postService.editPost(postId, postEditDto);
         return "";
     }
 
     //게시물 삭제
-    @PostMapping(value = "/{id}/delete")
-    public String deletePost(){
+    @PostMapping(value = "/{postId}/delete")
+    public String deletePost(@PathVariable Long postId){
+        postService.deletePost(postId);
+        return "redirect:/";
+    }
+
+    //게시물 검색
+    @RequestMapping(value = "/search")
+    public String searchPost(@RequestParam String keyword, Model model){
+        List<Post> searchPostList = postService.searchPost(keyword);
+        model.addAttribute("postList", searchPostList);
         return "";
     }
 
-    // 유저 프로필 페이지
-    @GetMapping("/userProfile")
-    public String userProfile(Model model, @AuthenticationPrincipal PrincipalDetail principal){
-        model.addAttribute("principal",principal);
-        model.addAttribute("boj_username",principal.getBojUsername());
-        return "contentView";
-    }
+
 }
