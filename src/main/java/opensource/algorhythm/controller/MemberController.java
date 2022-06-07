@@ -2,9 +2,12 @@ package opensource.algorhythm.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import opensource.algorhythm.config.auth.PrincipalDetail;
 import opensource.algorhythm.dto.MemberFormDto;
 import opensource.algorhythm.entity.Member;
+import opensource.algorhythm.repository.MemberRepository;
 import opensource.algorhythm.service.MemberService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +23,7 @@ import javax.validation.Valid;
 public class MemberController {
 
     private final MemberService memberService;
+    private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
     @GetMapping(value = "/new")
@@ -49,9 +53,13 @@ public class MemberController {
     }
 
     //회원 프로필 조회
-    @GetMapping(value = "/{id}")
-    public String seeProfile(){
-        return "ok";
+    @GetMapping(value = "/{userId}")
+    public String seeProfile(@PathVariable Long userId, Model model, @AuthenticationPrincipal PrincipalDetail principal){
+        model.addAttribute("principal",principal);
+        model.addAttribute("boj_username",principal.getBojUsername());
+        Member member = memberRepository.findById(userId).get();
+        model.addAttribute("member", member);
+        return "userProfile";
     }
 
 
