@@ -32,9 +32,7 @@ public class PrincipalDetail implements UserDetails {
         return member.getUsername();
     }
 
-    public String getBojUsername() {
-        return member.getBaekjoonId();
-    }
+    public String getBojUsername() { return member.getBaekjoonId(); }
     public String getGithubUsername() { return member.getGithubId(); }
 
     @Override
