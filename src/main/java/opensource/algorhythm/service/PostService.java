@@ -29,6 +29,10 @@ public class PostService {
         return post;
     }
 
+    public List<Post> findAllPost(){
+        return postRepository.findAll();
+    }
+
     //post 수정
     public String editPost(Long id, PostFormDto postFormDto){ //수정한 dto
         Post post = postRepository.getById(id);
