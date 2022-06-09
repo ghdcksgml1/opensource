@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import opensource.algorhythm.config.auth.PrincipalDetail;
 import opensource.algorhythm.dto.MemberFormDto;
 import opensource.algorhythm.entity.Member;
+import opensource.algorhythm.entity.Post;
 import opensource.algorhythm.repository.MemberRepository;
 import opensource.algorhythm.service.MemberService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -15,6 +16,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -63,8 +66,24 @@ public class MemberController {
         model.addAttribute("boj_username",principal.getBojUsername());
         model.addAttribute("github_username",principal.getGithubUsername());
         model.addAttribute("id",principal.getId());
+
         Member member = memberRepository.findById(userId).get();
         model.addAttribute("member", member);
+
+        try {
+            List<Post> memberPostList = member.getPost();
+            List<String> levelList = new ArrayList<>();
+            List<Integer> problemNumList = new ArrayList<>();
+            for (Post post : memberPostList) {
+                levelList.add(post.getLevel());
+                problemNumList.add(post.getProblemNum());
+            }
+            model.addAttribute("levelList", levelList);
+            model.addAttribute("problemNumList", problemNumList);
+        } catch (Exception e){
+
+        }
+
         return "userProfile";
     }
 
