@@ -23,14 +23,12 @@ public class MainController {
         model.addAttribute("principal",principal);
         model.addAttribute("boj_username",principal.getBojUsername());
         model.addAttribute("github_username",principal.getGithubUsername());
+        model.addAttribute("id",principal.getId());
         List<Post> postList = postService.findAllPost();
         model.addAttribute("postList", postList);
         return "index";
     }
 
-    @GetMapping(value = "/login")
-    public String login(){
-        return "login";
-    }
+
 
 }

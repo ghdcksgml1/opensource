@@ -36,6 +36,7 @@ public class PostController {
         model.addAttribute("principal",principal);
         model.addAttribute("boj_username",principal.getBojUsername());
         model.addAttribute("github_username",principal.getGithubUsername());
+        model.addAttribute("id",principal.getId());
 
         return "contentForm";
     }
@@ -74,6 +75,8 @@ public class PostController {
         model.addAttribute("principal",principal);
         model.addAttribute("boj_username",principal.getBojUsername());
         model.addAttribute("github_username",principal.getGithubUsername());
+        model.addAttribute("id",principal.getId());
+
         Post post = postRepository.findById(postId).get();
         model.addAttribute("post", post);
         return "contentView";
@@ -85,6 +88,8 @@ public class PostController {
         model.addAttribute("principal",principal);
         model.addAttribute("boj_username",principal.getBojUsername());
         model.addAttribute("github_username",principal.getGithubUsername());
+        model.addAttribute("id",principal.getId());
+
         Post post = postRepository.findById(postId).get();
         model.addAttribute("post", post);
         return "contentView";
