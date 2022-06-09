@@ -21,11 +21,12 @@ public class CommentService {
     //댓글 생성
     public Comment createComment(CommentDto commentDto){
         Comment comment = Comment.createComment(commentDto);
+        commentRepository.save(comment);
 
         Post post = postRepository.findById(commentDto.getPostId()).get();
         post.getCommentList().add(comment);
         postRepository.save(post);
 
-        return commentRepository.save(comment);
+        return comment;
     }
 }
