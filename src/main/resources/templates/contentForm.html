@@ -14,17 +14,17 @@
         <div class="col-4">
             <div style="margin:0 auto;text-align:center;height: 550px; width: 320px; background-color: white;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 border-radius: 10px;padding-top:50px;">
-                <div style="margin:0 auto; width: 200px;height: 200px;background-color:#C4C4C4; border-radius: 100%;"></div>
+                <img src="/img/default_profile.png" style="margin:0 auto; width: 200px;height: 200px;background-color:#C4C4C4; border-radius: 100%;">
                 <div style="margin-top:30px; font-weight: bold; font-size:32px" th:text="${principal.getUsername()}"></div>
                 <div style="height: 30px"></div>
-                <img style="font-weight: bold;font-size: 16px; color: #777777">내 프로필</img>
+                <div style="font-weight: bold;font-size: 16px; color: #777777">내 프로필</div>
                 <div style="height: 10px"></div>
                 <div style="width:170px;height:24px;margin:0 auto;">
-                    <img src="/img/solvedac_logo.png" height="24px" style="margin-bottom: 5px;"/>&nbsp<label style="font-weight: bold; font-size: 16px; color: #777777">Solved.ac</label>
+                    <img src="/img/solvedac_logo.png" height="24px" style="margin-bottom: 5px;"/>&nbsp;<a th:href="'https://solved.ac/profile/'+${boj_username}" style="font-weight: bold; font-size: 16px; color: #777777; text-underline: none;">Solved.ac</a>
                 </div>
                 <div style="height: 10px"></div>
                 <div>
-                    <i class="fa-brands fa-github"></i> <label style="font-weight: bold; font-size: 16px; color: #777777">&nbspGitHub</label>
+                    <i class="fa-brands fa-github"></i> <a th:href="'https://github.com/'+${github_username}" style="font-weight: bold; font-size: 16px; color: #777777">&nbsp;GitHub</a>
                 </div>
             </div>
         </div>
