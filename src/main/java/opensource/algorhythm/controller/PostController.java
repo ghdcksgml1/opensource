@@ -58,16 +58,25 @@ public class PostController {
 
             log.info("member={}, title={}, num={}, name={}, code={}", post.getMember(), post.getTitle(), post.getProblemNum(), post.getProblemName(), post.getCode());
             log.info("postList={}", member.getPost());
-
+            log.info("member post size={}", member.getPost().size());
         }catch (IllegalStateException e){
             model.addAttribute("errorMessage", e.getMessage());
             return "signup";
         }
+
         return "ok";
     }
 
     //특정 게시물 조회
     @GetMapping(value = "/{postId}")
+    public String seePostGet(@PathVariable Long postId, Model model){
+        Post post = postRepository.findById(postId).get();
+        model.addAttribute("post", post);
+        return "contentView";
+    }
+
+    //댓글 전송을 위한 특정 게시물 조회 post
+    @PostMapping(value = "/{postId}")
     public String seePost(@PathVariable Long postId, Model model){
         Post post = postRepository.findById(postId).get();
         model.addAttribute("post", post);
@@ -79,7 +88,7 @@ public class PostController {
     public String editPostGet(@PathVariable Long postId, Model model){
         Post post = postRepository.findById(postId).get();
         model.addAttribute("post", post);
-        return "contentView";
+        return "contentForm";
     }
 
     //게시물 수정 post
