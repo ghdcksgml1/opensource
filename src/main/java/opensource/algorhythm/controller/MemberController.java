@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Slf4j
-@RequestMapping("/members")
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
@@ -26,14 +25,19 @@ public class MemberController {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
-    @GetMapping(value = "/new")
+    @GetMapping(value = "/auth/login")
+    public String login(){
+        return "login";
+    }
+
+    @GetMapping(value = "/auth/new")
     public String memberForm(Model model){
         model.addAttribute("memberFormDto", new MemberFormDto());
         return "signup";
     }
 
     @ResponseBody
-    @PostMapping(value = "/new")
+    @PostMapping(value = "/auth/new")
     public String newMember(@RequestBody MemberFormDto memberFormDto, BindingResult bindingResult, Model model){
 
         if (bindingResult.hasErrors()){
@@ -53,10 +57,12 @@ public class MemberController {
     }
 
     //회원 프로필 조회
-    @GetMapping(value = "/{userId}")
+    @GetMapping(value = "/members/{userId}")
     public String seeProfile(@PathVariable Long userId, Model model, @AuthenticationPrincipal PrincipalDetail principal){
         model.addAttribute("principal",principal);
         model.addAttribute("boj_username",principal.getBojUsername());
+        model.addAttribute("github_username",principal.getGithubUsername());
+        model.addAttribute("id",principal.getId());
         Member member = memberRepository.findById(userId).get();
         model.addAttribute("member", member);
         return "userProfile";

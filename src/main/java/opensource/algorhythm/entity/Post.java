@@ -42,6 +42,7 @@ public class Post {
 
     private String tags;
 
+
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Comment> commentList = new ArrayList<>();
 

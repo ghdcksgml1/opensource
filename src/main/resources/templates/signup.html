@@ -74,7 +74,7 @@ border-radius: 10px;">
            baekjoonId : signup_baekjoonId,
            githubId : signup_githubId
        }
-       fetch("/members/new",{method:'POST'
+       fetch("/auth/new",{method:'POST'
            , headers:{'content-type':'application/json'}
            ,body:JSON.stringify(data)})
            .then(() => {window.location.href = "/login"})

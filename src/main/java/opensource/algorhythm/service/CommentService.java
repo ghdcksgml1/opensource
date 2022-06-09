@@ -20,10 +20,13 @@ public class CommentService {
 
     //댓글 생성
     public Comment createComment(CommentDto commentDto){
+
         Comment comment = new Comment();
         comment.setContent(commentDto.getContent());
 
         Post post = postRepository.findById(commentDto.getPostId()).get();
+
+        commentRepository.save(comment);
 
         comment.setPost(post);
         comment.setMemberId(commentDto.getMemberId());
