@@ -20,6 +20,7 @@ public class CommentService {
 
     //댓글 생성
     public Comment createComment(CommentDto commentDto){
+
         Comment comment = new Comment();
         comment.setContent(commentDto.getContent());
 
