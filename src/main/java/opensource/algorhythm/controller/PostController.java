@@ -119,13 +119,4 @@ public class PostController {
         return "redirect:/";
     }
 
-    //게시물 검색
-    @RequestMapping(value = "/search")
-    public String searchPost(@RequestParam String keyword, Model model){
-        List<Post> searchPostList = postService.searchPost(keyword);
-        model.addAttribute("postList", searchPostList);
-        return "";
-    }
-
-
 }
