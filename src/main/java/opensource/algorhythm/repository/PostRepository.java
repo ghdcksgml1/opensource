@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findByProblemNum(int problemNum);
-    List<Post> findByTagsContainingIgnoreCase(String tag);
     List<Post> findByProblemNameContaining(String name);
+
+    List<Post> findByTagsContaining(String keyword);
 }
