@@ -33,6 +33,7 @@ public class Post {
 
     private String timeComplexity;
 
+    @Lob
     private String code;
 
     //private Long memberId;
