@@ -54,27 +54,17 @@ public class PostService {
         postRepository.deleteById(id);
     }
 
-    //post 검색 - 문제 번호 or 태그로 검색
-    public List<Post> searchPost(String keyword){
-        List<Post> postList = new ArrayList<>();
+    //post 검색 - 태그로 검색
+    public List<Post> searchPostByTag(String keyword){
+        List<Post> postListByTag = postRepository.findByTagsContaining(keyword);
 
-        try {
-            List<Post> postListByProblemNum = postRepository.findByProblemNum(Integer.parseInt(keyword.trim()));
-            if (postListByProblemNum != null){
-                for (Post post : postListByProblemNum) {
-                    postList.add(post);
-                }
-            }
-        }catch (NumberFormatException e){
+        return postListByTag;
+    }
 
-        }
+    //post 검색 - 문제 번호로 검색
+    public List<Post> searchPostByProblemNum(int problemNum){
+        List<Post> postListByProblemNum = postRepository.findByProblemNum(problemNum);
 
-        List<Post> postListByTag = postRepository.findByTagsContainingIgnoreCase(keyword);
-        if (postListByTag != null){
-            for (Post post : postListByTag) {
-                postList.add(post);
-            }
-        }
-        return postList;
+        return postListByProblemNum;
     }
 }
