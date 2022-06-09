@@ -110,7 +110,7 @@ border-radius: 10px;padding-top:50px;">
                     problem_img.src = `https://static.solved.ac/tier_small/${json['items'][0]['level']}.svg`;
 
                     let tags = '';
-                    for(let i = 0;i<json['items'][0]['tags'].length; i++){
+                    for(let i = 0;i<2; i++){
                         tags += `#${json['items'][0]['tags'][i]['displayNames'][0]['name']} `;
                     }
                     problem_tags.value = tags;

@@ -34,6 +34,8 @@ public class PostController {
     public String postForm(Model model, @AuthenticationPrincipal PrincipalDetail principal){
         model.addAttribute("postFormDto", new PostFormDto());
         model.addAttribute("principal",principal);
+        model.addAttribute("boj_username",principal.getBojUsername());
+        model.addAttribute("github_username",principal.getGithubUsername());
 
         return "contentForm";
     }
@@ -68,7 +70,10 @@ public class PostController {
 
     //특정 게시물 조회
     @GetMapping(value = "/{postId}")
-    public String seePost(@PathVariable Long postId, Model model){
+    public String seePost(@PathVariable Long postId, Model model,@AuthenticationPrincipal PrincipalDetail principal){
+        model.addAttribute("principal",principal);
+        model.addAttribute("boj_username",principal.getBojUsername());
+        model.addAttribute("github_username",principal.getGithubUsername());
         Post post = postRepository.findById(postId).get();
         model.addAttribute("post", post);
         return "contentView";
@@ -76,7 +81,10 @@ public class PostController {
 
     //게시물 수정 폼 get
     @GetMapping(value = "/{postId}/edit")
-    public String editPostGet(@PathVariable Long postId, Model model){
+    public String editPostGet(@PathVariable Long postId, Model model,@AuthenticationPrincipal PrincipalDetail principal){
+        model.addAttribute("principal",principal);
+        model.addAttribute("boj_username",principal.getBojUsername());
+        model.addAttribute("github_username",principal.getGithubUsername());
         Post post = postRepository.findById(postId).get();
         model.addAttribute("post", post);
         return "contentView";

@@ -57,6 +57,7 @@ public class MemberController {
     public String seeProfile(@PathVariable Long userId, Model model, @AuthenticationPrincipal PrincipalDetail principal){
         model.addAttribute("principal",principal);
         model.addAttribute("boj_username",principal.getBojUsername());
+        model.addAttribute("github_username",principal.getGithubUsername());
         Member member = memberRepository.findById(userId).get();
         model.addAttribute("member", member);
         return "userProfile";
