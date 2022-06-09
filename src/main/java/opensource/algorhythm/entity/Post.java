@@ -42,8 +42,7 @@ public class Post {
 
     private String tags;
 
-    @OneToMany(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "comment_id")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Comment> commentList = new ArrayList<>();
 
     public static Post createPost(PostFormDto postFormDto){
