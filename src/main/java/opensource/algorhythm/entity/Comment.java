@@ -18,12 +18,15 @@ public class Comment {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
   @JoinColumn(name = "post_id")
   private Post post;
-  
-  private Long memberId;
+
+  @OneToOne
+  @JoinColumn(name = "member_id")
+  private Member member;
   
   private String content;
 
 }
+// select * from Comment C JOIN Member M ON (C.memberId = M.id) where C.post_id := 1

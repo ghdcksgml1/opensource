@@ -5,10 +5,12 @@ import opensource.algorhythm.config.auth.PrincipalDetail;
 import lombok.extern.slf4j.Slf4j;
 import opensource.algorhythm.dto.PostEditDto;
 import opensource.algorhythm.dto.PostFormDto;
+import opensource.algorhythm.entity.Comment;
 import opensource.algorhythm.entity.Member;
 import opensource.algorhythm.entity.Post;
 import opensource.algorhythm.repository.MemberRepository;
 import opensource.algorhythm.repository.PostRepository;
+import opensource.algorhythm.service.CommentService;
 import opensource.algorhythm.service.PostService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +30,7 @@ public class PostController {
     private final PostService postService;
     private final PostRepository postRepository;
     private final MemberRepository memberRepository;
+    private final CommentService commentService;
 
     //게시물 폼 생성
     @GetMapping(value = "/new")
@@ -79,6 +82,8 @@ public class PostController {
         model.addAttribute("id",principal.getId());
 
         Post post = postRepository.findById(postId).get();
+        List<Comment> comments = commentService.selectComment(postId);
+        model.addAttribute("comments",comments);
         model.addAttribute("post", post);
         return "contentView";
     }

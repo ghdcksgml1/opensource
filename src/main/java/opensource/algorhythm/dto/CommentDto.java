@@ -1,13 +1,17 @@
 package opensource.algorhythm.dto;
 
 import lombok.Getter;
+import lombok.Setter;
+import opensource.algorhythm.entity.Member;
+import opensource.algorhythm.entity.Post;
 
 @Getter
+@Setter
 public class CommentDto {
 
     private String content;
 
-    private Long postId;
+    private Post post;
 
-    private Long memberId;
+    private Member member;
 }
