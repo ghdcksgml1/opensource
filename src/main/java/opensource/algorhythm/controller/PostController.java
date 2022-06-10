@@ -114,7 +114,7 @@ public class PostController {
     @PostMapping(value = "/{postId}/edit")
     public String editPost(@PathVariable Long postId, @RequestBody PostEditDto postEditDto){
         Post post = postService.editPost(postId, postEditDto);
-        return "";
+        return "contentView";
     }
 
     //게시물 삭제
