@@ -5,6 +5,7 @@ import opensource.algorhythm.config.auth.PrincipalDetail;
 import opensource.algorhythm.dto.CommentDto;
 import opensource.algorhythm.entity.Comment;
 import opensource.algorhythm.entity.Member;
+import opensource.algorhythm.entity.Post;
 import opensource.algorhythm.repository.MemberRepository;
 import opensource.algorhythm.repository.PostRepository;
 import opensource.algorhythm.service.CommentService;
@@ -26,12 +27,42 @@ public class CommentController {
     private final PostRepository postRepository;
     private final CommentService commentService;
 
-    @PostMapping("/posts/{id}/new")
-    public String createComment(@PathVariable Long id, @RequestBody CommentDto commentDto, Model model, @AuthenticationPrincipal PrincipalDetail principal){
+    //댓글 전송
+    @PostMapping("/posts/{id}/comment/new")
+    public String createComment(@PathVariable Long id,
+                                @RequestBody CommentDto commentDto,
+                                @AuthenticationPrincipal PrincipalDetail principal,
+                                Model model){
         commentDto.setPost(postRepository.findById(id).get());
         commentDto.setMember(memberRepository.findByUsername(principal.getUsername()));
-        commentService.createComment(commentDto);
+        Comment comment = commentService.createComment(commentDto);
+        Post post = postRepository.findById(id).get();
+        model.addAttribute("principal",principal);
+        model.addAttribute("boj_username",principal.getBojUsername());
+        model.addAttribute("github_username",principal.getGithubUsername());
+        model.addAttribute("id",principal.getId());
+        model.addAttribute("comments", comment);
+        model.addAttribute("post", post);
+        return "contentView";
+    }
 
-        return "";
+    //댓글 삭제
+    @PostMapping(value = "/posts/{id}/comment/{commentId}/delete")
+    public String deleteComment(@PathVariable Long id,
+                                @PathVariable Long commentId,
+                                @AuthenticationPrincipal PrincipalDetail principal,
+                                Model model){
+        commentService.deleteComment(commentId);
+        Post post = postRepository.findById(id).get();
+        List<Comment> commentList = post.getCommentList();
+
+        model.addAttribute("principal",principal);
+        model.addAttribute("boj_username",principal.getBojUsername());
+        model.addAttribute("github_username",principal.getGithubUsername());
+        model.addAttribute("id",principal.getId());
+        model.addAttribute("comments", commentList);
+        model.addAttribute("post", post);
+
+        return "contentView";
     }
 }

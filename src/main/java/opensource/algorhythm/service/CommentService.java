@@ -48,4 +48,13 @@ public class CommentService {
         return comments;
     }
 
+    //댓글 삭제
+    public void deleteComment(Long commentId){
+        Comment comment = commentRepository.findById(commentId).get();
+        Post post = comment.getPost();
+        post.getCommentList().remove(comment);
+        commentRepository.deleteById(commentId);
+        postRepository.save(post);
+    }
+
 }

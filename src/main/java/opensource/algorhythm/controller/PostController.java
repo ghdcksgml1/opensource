@@ -3,6 +3,7 @@ package opensource.algorhythm.controller;
 import lombok.RequiredArgsConstructor;
 import opensource.algorhythm.config.auth.PrincipalDetail;
 import lombok.extern.slf4j.Slf4j;
+import opensource.algorhythm.dto.CommentDto;
 import opensource.algorhythm.dto.PostEditDto;
 import opensource.algorhythm.dto.PostFormDto;
 import opensource.algorhythm.entity.Comment;
@@ -88,10 +89,21 @@ public class PostController {
         return "contentView";
     }
 
-    //댓글 전송을 위한 특정 게시물 조회 post
-    @PostMapping(value = "/{postId}")
-    public String seePost(@PathVariable Long postId, Model model){
-        Post post = postRepository.findById(postId).get();
+
+    @PostMapping(value = "/{id}")
+    public String seePost(@PathVariable Long id,
+                          @RequestBody CommentDto commentDto,
+                          @AuthenticationPrincipal PrincipalDetail principal,
+                          Model model){
+        commentDto.setPost(postRepository.findById(id).get());
+        commentDto.setMember(memberRepository.findByUsername(principal.getUsername()));
+        Comment comment = commentService.createComment(commentDto);
+        Post post = postRepository.findById(id).get();
+        model.addAttribute("principal",principal);
+        model.addAttribute("boj_username",principal.getBojUsername());
+        model.addAttribute("github_username",principal.getGithubUsername());
+        model.addAttribute("id",principal.getId());
+        model.addAttribute("comments", comment);
         model.addAttribute("post", post);
         return "contentView";
     }
