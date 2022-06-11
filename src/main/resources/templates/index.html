@@ -39,10 +39,10 @@ border-radius: 10px;padding-top:50px;">
                 <div style="height:15px"></div>
                 <div id="search-bar" class="row" style="margin:0 auto;width: 800px;height: 65px; background-color: white;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 10px;">
                     <div class="row height d-flex justify-content-center align-items-center">
-                        <div class="form">
+                        <form action="/search" method="get">
                             <div class="row">
                                 <div class="col-6">
-                                    <select class="form-select" aria-label="Default select example">
+                                    <select id="search-select" name="keyword" class="form-select" aria-label="Default select example">
                                         <option value="" selected>알고리즘</option>
                                         <option value="수학">수학</option>
                                         <option value="구현">구현</option>
@@ -107,13 +107,15 @@ border-radius: 10px;padding-top:50px;">
                                     </select>
                                 </div>
                                 <div class="col-5">
-                                    <input type="text" class="form-control form-input" placeholder="(선택) 문제번호를 입력하세요.">
+                                    <input id="search-input" type="text" name="problemNum" class="form-control form-input" placeholder="(선택) 문제번호를 입력하세요.">
                                 </div>
                                 <div class="col-1">
-                                    <i class="fa fa-search" style="font-size:30px;margin-top:5px;"></i>
+                                    <button type="submit">
+                                        <i id="search-icon" class="fa fa-search" style="font-size:30px;margin-top:5px;"></i>
+                                    </button>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
 
@@ -146,6 +148,15 @@ border-radius: 10px;padding-top:50px;">
 </div>
 </body>
 <script>
+    const search_btn = document.querySelector("#search-icon");
+    search_btn.addEventListener('click',()=>{
+        const search_select = document.querySelector("#search-select");
+        const search_input = document.querySelector("#search-input").value * 1;
+
+
+        fetch(`/search?keyword=${search_select.value}&problemNum=${search_input}`);
+    });
+
     const img_bg = document.querySelector("#img-bg");
     img_bg.addEventListener('click',()=>{
        window.location.href = "/";
@@ -170,6 +181,7 @@ border-radius: 10px;padding-top:50px;">
            window.location.href = `/posts/${post_id[i].textContent}`;
         });
     }
+
 
 </script>
 </html>

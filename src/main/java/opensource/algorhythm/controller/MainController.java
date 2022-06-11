@@ -36,10 +36,11 @@ public class MainController {
     }
 
     //게시물 검색
-    @RequestMapping(value = "/search")
+    @GetMapping(value = "/search")
     public String searchPost(@RequestParam String keyword,
                              @RequestParam int problemNum,
-                             Model model){
+                             Model model,
+                             @AuthenticationPrincipal PrincipalDetail principal){
         List<Post> searchPostList = new ArrayList<>();
 
         List<Post> postListByTag = postService.searchPostByTag(keyword);
@@ -55,6 +56,11 @@ public class MainController {
                 searchPostList.add(post);
             }
         }
+        System.out.println("searchPostList = " + searchPostList);
+        model.addAttribute("principal",principal);
+        model.addAttribute("boj_username",principal.getBojUsername());
+        model.addAttribute("github_username",principal.getGithubUsername());
+        model.addAttribute("id",principal.getId());
         model.addAttribute("postList", searchPostList);
         return "index";
     }
