@@ -89,7 +89,7 @@ public class PostController {
         return "contentView";
     }
 
-
+    /*
     @PostMapping(value = "/{id}")
     public String seePost(@PathVariable Long id,
                           @RequestBody CommentDto commentDto,
@@ -106,11 +106,13 @@ public class PostController {
         model.addAttribute("comments", comment);
         model.addAttribute("post", post);
         return "contentView";
-    }
+    }*/
 
     //게시물 수정 폼 get
     @GetMapping(value = "/{postId}/edit")
-    public String editPostGet(@PathVariable Long postId, Model model,@AuthenticationPrincipal PrincipalDetail principal){
+    public String editPostGet(@PathVariable Long postId,
+                              @AuthenticationPrincipal PrincipalDetail principal,
+                              Model model){
         model.addAttribute("principal",principal);
         model.addAttribute("boj_username",principal.getBojUsername());
         model.addAttribute("github_username",principal.getGithubUsername());
@@ -118,20 +120,26 @@ public class PostController {
 
         Post post = postRepository.findById(postId).get();
         model.addAttribute("post", post);
-        return "contentForm";
+        return "";
     }
 
     //게시물 수정 post
     @ResponseBody
     @PostMapping(value = "/{postId}/edit")
-    public String editPost(@PathVariable Long postId, @RequestBody PostEditDto postEditDto){
+    public String editPost(@PathVariable Long postId,
+                           @RequestBody PostEditDto postEditDto,
+                           @AuthenticationPrincipal PrincipalDetail principal,
+                           Model model){
         Post post = postService.editPost(postId, postEditDto);
+        model.addAttribute("post", post);
         return "contentView";
     }
 
     //게시물 삭제
     @PostMapping(value = "/{postId}/delete")
-    public String deletePost(@PathVariable Long postId){
+    public String deletePost(@PathVariable Long postId,
+                             @AuthenticationPrincipal PrincipalDetail principal,
+                             Model model){
         postService.deletePost(postId);
         return "redirect:/";
     }
