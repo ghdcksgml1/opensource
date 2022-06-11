@@ -33,13 +33,15 @@ public class CommentController {
                                 Model model){
         commentDto.setPost(postRepository.findById(id).get());
         commentDto.setMember(memberRepository.findByUsername(principal.getUsername()));
-        Comment comment = commentService.createComment(commentDto);
+        commentService.createComment(commentDto);
+
+        List<Comment> comments = commentService.selectComment(id);
         Post post = postRepository.findById(id).get();
         model.addAttribute("principal",principal);
         model.addAttribute("boj_username",principal.getBojUsername());
         model.addAttribute("github_username",principal.getGithubUsername());
         model.addAttribute("id",principal.getId());
-        model.addAttribute("comments", comment);
+        model.addAttribute("comments", comments);
         model.addAttribute("post", post);
         return "contentView";
     }
