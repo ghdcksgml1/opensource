@@ -37,7 +37,9 @@ public class MainController {
 
     //게시물 검색
     @RequestMapping(value = "/search")
-    public String searchPost(@RequestParam String keyword, @RequestParam int problemNum, Model model){
+    public String searchPost(@RequestParam String keyword,
+                             @RequestParam int problemNum,
+                             Model model){
         List<Post> searchPostList = new ArrayList<>();
 
         List<Post> postListByTag = postService.searchPostByTag(keyword);
@@ -53,7 +55,6 @@ public class MainController {
                 searchPostList.add(post);
             }
         }
-
         model.addAttribute("postList", searchPostList);
         return "index";
     }
