@@ -44,7 +44,8 @@ public class CommentService {
     // 댓글 조회
     public List<Comment> selectComment(Long post_id){
         Post post = postRepository.findById(post_id).get();
-        List<Comment> comments = commentJPQLRepository.commentJoinPost(post);
+        //List<Comment> comments = commentJPQLRepository.commentJoinPost(post);
+        List<Comment> comments = post.getCommentList();
         return comments;
     }
 
