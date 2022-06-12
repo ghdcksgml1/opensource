@@ -90,15 +90,15 @@ public class MemberController {
     }
 
     //프로필 폼 전송
-    @PostMapping(value = "/members/{userId}")
-    public String profilePost(@RequestBody ProfileDto profileDto,
-                              @PathVariable Long userId){
-        Member member = memberRepository.findById(userId).get();
+    @PostMapping(value = "/members/")
+    public String profilePost(ProfileDto profileDto,
+                              @AuthenticationPrincipal PrincipalDetail principal){
+        Member member = memberRepository.findById(principal.getId()).get();
         member.getMemberProfile().setMemo(profileDto.getMemo());
         member.getMemberProfile().setFavAlgorithm(profileDto.getFavAlgorithm());
 
         memberRepository.save(member);
-        return "";
+        return "/members/"+principal.getId();
     }
 
 
