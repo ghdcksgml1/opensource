@@ -114,6 +114,7 @@ public class MemberController {
 
         memberRepository.save(member);
 
+
         //return "/members/"+principal.getId();
         return "redirect:/members/"+principal.getId();
 
