@@ -4,9 +4,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import opensource.algorhythm.config.auth.PrincipalDetail;
 import opensource.algorhythm.dto.MemberFormDto;
+import opensource.algorhythm.dto.PostFormDto;
+import opensource.algorhythm.dto.ProfileDto;
 import opensource.algorhythm.entity.Member;
+import opensource.algorhythm.entity.MemberProfile;
 import opensource.algorhythm.entity.Post;
 import opensource.algorhythm.repository.MemberRepository;
+import opensource.algorhythm.repository.PostRepository;
 import opensource.algorhythm.service.MemberService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -61,13 +65,16 @@ public class MemberController {
 
     //회원 프로필 조회
     @GetMapping(value = "/members/{userId}")
-    public String seeProfile(@PathVariable Long userId, Model model, @AuthenticationPrincipal PrincipalDetail principal){
+    public String seeProfile(@PathVariable Long userId,
+                             Model model,
+                             @AuthenticationPrincipal PrincipalDetail principal){
         model.addAttribute("principal",principal);
         model.addAttribute("boj_username",principal.getBojUsername());
         model.addAttribute("github_username",principal.getGithubUsername());
         model.addAttribute("id",principal.getId());
 
         Member member = memberRepository.findById(userId).get();
+        MemberProfile memberProfile = member.getMemberProfile();
         model.addAttribute("member", member);
 
         try {
@@ -80,11 +87,24 @@ public class MemberController {
             }
             model.addAttribute("levelList", levelList);
             model.addAttribute("problemNumList", problemNumList);
+            model.addAttribute("profile", memberProfile);
         } catch (Exception e){
 
         }
 
         return "userProfile";
+    }
+
+    //프로필 폼 전송
+    @PostMapping(value = "/members/{userId}")
+    public String profilePost(@RequestBody ProfileDto profileDto,
+                              @PathVariable Long userId){
+        Member member = memberRepository.findById(userId).get();
+        member.getMemberProfile().setMemo(profileDto.getMemo());
+        member.getMemberProfile().setFavAlgorithm(profileDto.getFavAlgorithm());
+
+        memberRepository.save(member);
+        return "";
     }
 
 
