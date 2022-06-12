@@ -79,15 +79,9 @@ public class MemberController {
 
         try {
             List<Post> memberPostList = member.getPost();
-            List<String> levelList = new ArrayList<>();
-            List<Integer> problemNumList = new ArrayList<>();
-            for (Post post : memberPostList) {
-                levelList.add(post.getLevel());
-                problemNumList.add(post.getProblemNum());
-            }
-            model.addAttribute("levelList", levelList);
-            model.addAttribute("problemNumList", problemNumList);
+            model.addAttribute("posts",memberPostList);
             model.addAttribute("profile", memberProfile);
+            System.out.println("memberProfile = " + memberProfile);
         } catch (Exception e){
 
         }
