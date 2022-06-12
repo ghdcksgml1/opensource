@@ -9,6 +9,7 @@ import opensource.algorhythm.dto.ProfileDto;
 import opensource.algorhythm.entity.Member;
 import opensource.algorhythm.entity.MemberProfile;
 import opensource.algorhythm.entity.Post;
+import opensource.algorhythm.repository.MemberProfileRepository;
 import opensource.algorhythm.repository.MemberRepository;
 import opensource.algorhythm.repository.PostRepository;
 import opensource.algorhythm.service.MemberService;
@@ -31,6 +32,7 @@ public class MemberController {
 
     private final MemberService memberService;
     private final MemberRepository memberRepository;
+    private final MemberProfileRepository memberProfileRepository;
     private final PasswordEncoder passwordEncoder;
 
     @GetMapping(value = "/auth/login")
@@ -101,11 +103,20 @@ public class MemberController {
                 .build();
         log.info("memo : {}, fav : {}",profileDto.getMemo(), profileDto.getFavAlgorithm());
         Member member = memberRepository.findById(principal.getId()).get();
-        member.getMemberProfile().setMemo(profileDto.getMemo());
-        member.getMemberProfile().setFavAlgorithm(profileDto.getFavAlgorithm());
+
+        MemberProfile memberProfile = new MemberProfile();
+        memberProfile.setMemo(profileDto.getMemo());
+        memberProfile.setFavAlgorithm(profileDto.getFavAlgorithm());
+
+        memberProfileRepository.save(memberProfile);
+
+        member.setMemberProfile(memberProfile);
 
         memberRepository.save(member);
-        return "/members/"+principal.getId();
+
+        //return "/members/"+principal.getId();
+        return "redirect:/members/"+principal.getId();
+
     }
 
 
