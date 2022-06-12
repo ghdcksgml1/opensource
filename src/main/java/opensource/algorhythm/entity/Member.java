@@ -36,6 +36,10 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Post> post = new ArrayList<>();
 
+    @OneToOne
+    @JoinColumn(name = "profile_id")
+    private MemberProfile memberProfile;
+
     public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder){
         Member member = new Member();
         member.setUsername(memberFormDto.getUsername());
