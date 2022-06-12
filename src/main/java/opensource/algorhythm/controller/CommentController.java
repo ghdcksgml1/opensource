@@ -26,7 +26,7 @@ public class CommentController {
     private final CommentService commentService;
 
     //댓글 생성
-    @PostMapping("/posts/{id}/comment/new")
+    @PostMapping("/posts/{id}/new")
     public String createComment(@PathVariable Long id,
                                 @RequestBody CommentDto commentDto,
                                 @AuthenticationPrincipal PrincipalDetail principal,
