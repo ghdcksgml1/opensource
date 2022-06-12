@@ -45,10 +45,10 @@ border-radius: 10px;padding-top:50px;">
                     <div id="memo" class="row" style="margin:0 auto; width: 850px; height: 160px; background-color: white;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 10px; text-align: left;font-weight: bold;font-size: 15px; color: #3648A0; margin-bottom: 25px;">
                         <label for="memo" style="font-size: 20px; line-height: 55px; text-indent: 25px; ">메모</label>
                         <th:block th:if="${profile != null}">
-                            <textarea id="memo" name="memo" cols="50" rows="4" style="padding-left: 100px; border:0 solid black; margin-bottom: 50px; resize:none" th:value="${profile.getMemo()}"></textarea>
+                            <input type="text" name="memo" cols="50" rows="4" style="padding-left: 100px; border:0 solid black; margin-bottom: 50px; resize:none" th:value="${profile.getMemo()}"></input>
                         </th:block>
                         <th:block th:unless="${profile != null}">
-                            <textarea id="memo" name="memo" cols="50" rows="4" style="padding-left: 100px; border:0 solid black; margin-bottom: 50px; resize:none"></textarea>
+                            <input type="text" name="memo" cols="50" rows="4" style="padding-left: 100px; border:0 solid black; margin-bottom: 50px; resize:none"></input>
                         </th:block>
                     </div>
                     <div id="post_ad" class="row" style="margin:0 auto; width: 850px; height: 60px; background-color: white;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 10px; text-align: left;font-weight: bold;font-size: 20px; color: #3648A0; margin-bottom: 25px; line-height: 60px; padding-left: 30px;">
@@ -62,10 +62,10 @@ border-radius: 10px;padding-top:50px;">
                     <div id="interesting" class="row" style="margin:0 auto; width: 850px; height: 60px; background-color: white;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 10px; text-align: left; font-weight: bold;font-size: 20px; color: #3648A0; margin-bottom: 15px; line-height: 60px;  text-indent: 25px;">
 
                         <th:block th:if="${profile != null}">
-                            <label>관심있는 알고리즘: <i></i><input type="text" name="favAlgorithm" id=interesting style = "color:blue; font-weight: bold; border:0 solid black; width: 500px; height:50px;" th:value="${profile.getFavAlgorithm()}"></i></label>
+                            <label>관심있는 알고리즘: <i></i><input type="text" name="favAlgorithm" style = "color:blue; font-weight: bold; border:0 solid black; width: 500px; height:50px;" th:value="${profile.getFavAlgorithm()}"></i></label>
                         </th:block>
                         <th:block th:unless="${profile != null}">
-                            <label>관심있는 알고리즘: <i></i><input type="text" name="favAlgorithm" id=interesting style = "color:blue; font-weight: bold; border:0 solid black; width: 500px; height:50px;"></i></label>
+                            <label>관심있는 알고리즘: <i></i><input type="text" name="favAlgorithm" style = "color:blue; font-weight: bold; border:0 solid black; width: 500px; height:50px;"></i></label>
                         </th:block>
                     </div>
                     <button id="update_btn" type="submit"

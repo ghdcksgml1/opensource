@@ -12,6 +12,7 @@ import opensource.algorhythm.entity.Post;
 import opensource.algorhythm.repository.MemberRepository;
 import opensource.algorhythm.repository.PostRepository;
 import opensource.algorhythm.service.MemberService;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -91,8 +92,14 @@ public class MemberController {
 
     //프로필 폼 전송
     @PostMapping(value = "/members/")
-    public String profilePost(ProfileDto profileDto,
+    public String profilePost(@RequestParam String memo,
+                              @RequestParam String favAlgorithm,
                               @AuthenticationPrincipal PrincipalDetail principal){
+        ProfileDto profileDto = ProfileDto.builder()
+                .memo(memo)
+                .favAlgorithm(favAlgorithm)
+                .build();
+        log.info("memo : {}, fav : {}",profileDto.getMemo(), profileDto.getFavAlgorithm());
         Member member = memberRepository.findById(principal.getId()).get();
         member.getMemberProfile().setMemo(profileDto.getMemo());
         member.getMemberProfile().setFavAlgorithm(profileDto.getFavAlgorithm());
