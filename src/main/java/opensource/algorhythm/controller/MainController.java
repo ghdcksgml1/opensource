@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @Controller
@@ -38,30 +40,30 @@ public class MainController {
     //게시물 검색
     @GetMapping(value = "/search")
     public String searchPost(@RequestParam String keyword,
-                             @RequestParam int problemNum,
+                             @RequestParam(required = false, defaultValue = "-1") int problemNum,
                              Model model,
                              @AuthenticationPrincipal PrincipalDetail principal){
-        List<Post> searchPostList = new ArrayList<>();
-
+        Set<Post> searchPostSet = new HashSet<>();
+        log.info("keyword={}, num={}", keyword, problemNum);
         List<Post> postListByTag = postService.searchPostByTag(keyword);
         List<Post> postListByProblemNum = postService.searchPostByProblemNum(problemNum);
         log.info("search result: {}", postListByTag.get(0).getTitle());
         if (postListByTag != null){
             for (Post post : postListByTag) {
-                searchPostList.add(post);
+                searchPostSet.add(post);
             }
         }
         if (postListByProblemNum != null){
             for (Post post : postListByProblemNum) {
-                searchPostList.add(post);
+                searchPostSet.add(post);
             }
         }
-        System.out.println("searchPostList = " + searchPostList);
+
         model.addAttribute("principal",principal);
         model.addAttribute("boj_username",principal.getBojUsername());
         model.addAttribute("github_username",principal.getGithubUsername());
         model.addAttribute("id",principal.getId());
-        model.addAttribute("postList", searchPostList);
+        model.addAttribute("postList", searchPostSet);
         return "index";
     }
 
